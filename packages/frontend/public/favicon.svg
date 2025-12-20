@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#gradient1)"/>
+  
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- AI Brain Icon -->
+  <path d="M50 25C40 25 32 33 32 43C32 48 34 52.5 37 56L35 65L40 63C43 65 46.5 66 50 66C60 66 68 58 68 48C68 38 60 30 50 30M42 45C42 43.3 43.3 42 45 42C46.7 42 48 43.3 48 45C48 46.7 46.7 48 45 48C43.3 48 42 46.7 42 45M52 45C52 43.3 53.3 42 55 42C56.7 42 58 43.3 58 45C58 46.7 56.7 48 55 48C53.3 48 52 46.7 52 45" fill="white" opacity="0.9"/>
+  
+  <!-- Network Connection Lines -->
+  <line x1="45" y1="48" x2="42" y2="58" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="55" y1="48" x2="58" y2="58" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="48" y1="45" x2="52" y2="45" stroke="white" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Shopping Cart/ERP Icon -->
+  <path d="M63 70L65 75H75L77 70M65 75C65 76.7 66.3 78 68 78C69.7 78 71 76.7 71 75M71 75C71 76.7 72.3 78 74 78C75.7 78 77 76.7 77 75" stroke="white" stroke-width="2" fill="none" opacity="0.8"/>
+  <rect x="63" y="68" width="16" height="4" fill="white" opacity="0.8" rx="1"/>
+</svg>
