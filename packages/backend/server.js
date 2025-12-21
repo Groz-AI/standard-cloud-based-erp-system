@@ -23,7 +23,7 @@ process.on('unhandledRejection', (reason, promise) => {
 // Database pool with optimized settings
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' 
+  ssl: process.env.DATABASE_URL?.includes('supabase')
     ? { rejectUnauthorized: false, checkServerIdentity: () => undefined }
     : false,
   max: 20, // Maximum number of clients in the pool
