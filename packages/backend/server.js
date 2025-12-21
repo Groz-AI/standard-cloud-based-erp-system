@@ -187,6 +187,25 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
+// Check if super admin exists
+app.get('/test-users', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT email, first_name, last_name, tenant_id, is_active FROM users WHERE tenant_id IS NULL'
+    );
+    res.json({ 
+      status: 'Success',
+      superAdminCount: result.rows.length,
+      users: result.rows
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      error: error.message,
+      code: error.code
+    });
+  }
+});
+
 // Login
 app.post('/api/auth/login', async (req, res) => {
   try {
