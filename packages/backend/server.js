@@ -21,11 +21,12 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 // Database pool with optimized settings
+const isSupabase = process.env.DATABASE_URL?.includes('supabase');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('supabase')
-    ? { rejectUnauthorized: false, checkServerIdentity: () => undefined }
-    : false,
+  ssl: isSupabase ? {
+    rejectUnauthorized: false,
+  } : false,
   max: 20, // Maximum number of clients in the pool
   min: 2, // Minimum number of clients to keep open
   idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
