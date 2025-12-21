@@ -23,7 +23,9 @@ process.on('unhandledRejection', (reason, promise) => {
 // Database pool with optimized settings
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  ssl: process.env.NODE_ENV === 'production' 
+    ? { rejectUnauthorized: false, checkServerIdentity: () => undefined }
+    : false,
   max: 20, // Maximum number of clients in the pool
   min: 2, // Minimum number of clients to keep open
   idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
