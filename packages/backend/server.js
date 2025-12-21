@@ -22,8 +22,11 @@ process.on('unhandledRejection', (reason, promise) => {
 
 // Database pool with optimized settings
 const isSupabase = process.env.DATABASE_URL?.includes('supabase');
+// Remove sslmode parameter if present (conflicts with our ssl config)
+const connectionString = process.env.DATABASE_URL?.replace(/[?&]sslmode=\w+/, '');
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString,
   ssl: isSupabase ? {
     rejectUnauthorized: false,
   } : false,
