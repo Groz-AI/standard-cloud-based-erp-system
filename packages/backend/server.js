@@ -43,19 +43,28 @@ pool.on('error', (err) => {
 app.use(helmet());
 app.use(cors({ 
   origin: (origin, callback) => {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      process.env.CORS_ORIGIN,
-      /https:\/\/.*\.vercel\.app$/
-    ].filter(Boolean);
-    
-    if (!origin || allowedOrigins.some(allowed => 
-      typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
-    )) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) {
+      return callback(null, true);
     }
+    
+    // Allow localhost
+    if (origin.includes('localhost')) {
+      return callback(null, true);
+    }
+    
+    // Allow all Vercel deployments
+    if (origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    
+    // Allow specific CORS_ORIGIN if set
+    if (process.env.CORS_ORIGIN && origin === process.env.CORS_ORIGIN) {
+      return callback(null, true);
+    }
+    
+    // Reject all others
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true 
 }));
