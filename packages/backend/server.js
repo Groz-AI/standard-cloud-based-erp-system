@@ -166,6 +166,24 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Database test endpoint
+app.get('/test-db', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW() as time, version() as pg_version');
+    res.json({ 
+      status: 'Database connected', 
+      time: result.rows[0].time,
+      version: result.rows[0].pg_version
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      status: 'Database connection failed', 
+      error: error.message,
+      code: error.code
+    });
+  }
+});
+
 // Login
 app.post('/api/auth/login', async (req, res) => {
   try {
