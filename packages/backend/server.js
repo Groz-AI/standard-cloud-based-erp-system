@@ -39,7 +39,21 @@ pool.on('error', (err) => {
 // Middleware
 app.use(helmet());
 app.use(cors({ 
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000', 
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      process.env.CORS_ORIGIN,
+      /https:\/\/.*\.vercel\.app$/
+    ].filter(Boolean);
+    
+    if (!origin || allowedOrigins.some(allowed => 
+      typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
+    )) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true 
 }));
 app.use(compression());
