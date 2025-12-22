@@ -61,6 +61,11 @@ app.use(cors({
       return callback(null, true);
     }
     
+    // Allow grozai.net custom domains
+    if (origin.endsWith('.grozai.net') || origin === 'https://grozai.net') {
+      return callback(null, true);
+    }
+    
     // Allow specific CORS_ORIGIN if set
     if (process.env.CORS_ORIGIN && origin === process.env.CORS_ORIGIN) {
       return callback(null, true);
