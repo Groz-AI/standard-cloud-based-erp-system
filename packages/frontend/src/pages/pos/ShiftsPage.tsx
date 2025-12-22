@@ -201,17 +201,22 @@ export default function ShiftsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2 sm:gap-3">
             <Clock className="h-6 w-6 text-primary" />
             {t('shifts.title')}
           </h1>
           <p className="text-muted-foreground mt-1">{t('shifts.manage')}</p>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-lg">
-          <Store className="h-4 w-4 text-slate-500" />
-          <span className="text-sm font-medium">{currentStoreName}</span>
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap sm:flex-nowrap">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-lg">
+            <Store className="h-4 w-4 text-slate-500" />
+            <span className="text-sm font-medium">{currentStoreName}</span>
+          </div>
+          <Button onClick={() => setShowOpenModal(true)} className="gap-2" size="lg">
+            <Play className="h-5 w-5" /> {t('shifts.openShift')}
+          </Button>
         </div>
       </div>
 
@@ -290,10 +295,10 @@ export default function ShiftsPage() {
       </div>
 
       {/* Shifts History */}
-      <div className="bg-white rounded-xl border shadow-sm">
+      <div className="bg-white rounded-xl sm:rounded-2xl border shadow-sm overflow-hidden">
         <div className="p-4 border-b flex items-center justify-between">
           <h3 className="font-semibold">{t('shifts.shiftHistory')}</h3>
-          <div className="flex gap-1 bg-slate-100 p-1 rounded-lg">
+          <div className="flex gap-2 sm:gap-3 flex-wrap sm:flex-nowrap">
             {(['all', 'open', 'closed'] as const).map((status) => (
               <button
                 key={status}
@@ -311,11 +316,11 @@ export default function ShiftsPage() {
         </div>
 
         {shiftsLoading ? (
-          <div className="flex items-center justify-center py-12">
+          <div className="flex items-center justify-center py-8">
             <Loader2 className="h-8 w-8 animate-spin text-slate-400" />
           </div>
         ) : shifts.length === 0 ? (
-          <div className="text-center py-12 text-slate-500">
+          <div className="text-center py-8 text-slate-500">
             <Clock className="h-12 w-12 mx-auto mb-3 opacity-50" />
             <p>No shifts found</p>
           </div>
@@ -483,6 +488,7 @@ export default function ShiftsPage() {
                     autoFocus
                   />
                 </div>
+                <p className="text-xs text-slate-500 mt-2">Enter the amount of cash in the drawer at the end of your shift</p>
               </div>
 
               <div>
@@ -619,7 +625,7 @@ export default function ShiftsPage() {
               ) : (
                 <>
                   {/* Summary Cards */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
                     <div className="bg-slate-50 rounded-xl p-4">
                       <p className="text-xs text-slate-500 uppercase">Total Sales</p>
                       <p className="text-xl font-bold text-emerald-600 mt-1">{formatCurrency(selectedShift.total_sales)}</p>

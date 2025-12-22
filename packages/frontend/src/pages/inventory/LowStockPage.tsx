@@ -35,11 +35,11 @@ export default function LowStockPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-amber-100 flex items-center justify-center">
-              <AlertTriangle className="h-5 w-5 text-amber-600" />
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-2 sm:gap-3">
+            <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-amber-100 flex items-center justify-center">
+              <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600" />
             </div>
             {t('inventory.lowStockAlerts')}
           </h1>
@@ -47,13 +47,13 @@ export default function LowStockPage() {
             {count} {t('inventory.productsNeedRestock')}
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => refetch()} disabled={isFetching}>
-            <RefreshCw className={`h-4 w-4 mr-2 ${isFetching ? 'animate-spin' : ''}`} />
-            {t('common.refresh')}
+        <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+          <Button variant="outline" onClick={() => refetch()} disabled={isFetching} size="sm">
+            <RefreshCw className={`h-4 w-4 sm:mr-2 ${isFetching ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline">{t('common.refresh')}</span>
           </Button>
           <Link to="/inventory/receive">
-            <Button className="bg-emerald-600 hover:bg-emerald-700">
+            <Button className="bg-emerald-600 hover:bg-emerald-700" size="sm">
               <Package className="h-4 w-4 mr-2" />
               {t('sidebar.receiveStock')}
             </Button>
@@ -62,7 +62,7 @@ export default function LowStockPage() {
       </div>
 
       {/* Alerts List */}
-      <div className="bg-white rounded-2xl border shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl sm:rounded-2xl border shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="p-12 text-center">
             <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />

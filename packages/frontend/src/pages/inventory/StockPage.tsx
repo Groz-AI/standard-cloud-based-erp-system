@@ -103,13 +103,13 @@ export default function StockPage() {
 
   return (
     <div className="space-y-8 animate-fade-in pb-10">
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      {/* Search and Filters */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">{t('stock.title')}</h1>
-          <p className="text-slate-500 mt-1 text-lg">{t('stock.description')}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{t('stock.title')}</h1>
+          <p className="text-slate-500 mt-1 text-sm sm:text-lg">{t('stock.description')}</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap sm:flex-nowrap">
           <Button 
             onClick={handleRefresh} 
             disabled={isLoading}

@@ -164,9 +164,9 @@ export default function StockForecastPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-3">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-2 sm:gap-3">
             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
               <Zap className="h-5 w-5 text-white" />
             </div>
@@ -290,7 +290,7 @@ export default function StockForecastPage() {
       )}
 
       {!isLoading && filteredRecommendations.length > 0 && (
-        <div className="space-y-3">
+        <div className="space-y-3 sm:space-y-4">
           {filteredRecommendations.map((rec) => (
             <RecommendationCard
               key={rec.product_id}
@@ -358,7 +358,7 @@ function RecommendationCard({ recommendation: rec, currency, onCreateOrder }: { 
           </p>
 
           {/* Stats Grid */}
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
             <StatBox
               label="Current Stock"
               value={rec.current_stock}

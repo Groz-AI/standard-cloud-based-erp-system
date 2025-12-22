@@ -40,30 +40,30 @@ export default function ReportsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{t('reports.title')}</h1>
-          <p className="text-muted-foreground">{t('reports.subtitle')}</p>
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">{t('reports.title')}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">{t('reports.subtitle')}</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Input
             type="date"
             value={dateRange.start}
             onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
-            className="w-40"
+            className="w-32 sm:w-40 text-sm"
           />
-          <span className="text-muted-foreground">to</span>
+          <span className="text-sm text-muted-foreground">to</span>
           <Input
             type="date"
             value={dateRange.end}
             onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
-            className="w-40"
+            className="w-32 sm:w-40 text-sm"
           />
         </div>
       </div>
 
       {/* Report Tabs */}
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap overflow-x-auto pb-2">
         {reports.map((report) => (
           <Button
             key={report.id}

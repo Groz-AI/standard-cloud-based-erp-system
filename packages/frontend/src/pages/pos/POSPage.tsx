@@ -58,6 +58,7 @@ export default function POSPage() {
   const [showWalletOptions, setShowWalletOptions] = useState(false);
   const [cashReceived, setCashReceived] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showMobileCart, setShowMobileCart] = useState(false);
   
   // Customer states
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
@@ -356,38 +357,40 @@ export default function POSPage() {
   return (
     <div className="h-screen flex flex-col bg-[#F5F5F7] text-slate-900 font-sans selection:bg-primary/20">
       {/* Header */}
-      <header className="h-16 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 flex items-center justify-between px-6 z-20">
-        <div className="flex items-center gap-4">
+      <header className="h-14 sm:h-16 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 flex items-center justify-between px-3 sm:px-6 z-20">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Button 
             variant="ghost" 
             size="icon" 
-            className="text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl"
+            className="text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl h-9 w-9 sm:h-10 sm:w-10"
             onClick={() => navigate('/dashboard')}
           >
-            <ArrowLeft className="h-5 w-5" />
+            <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-indigo-600" />
-              {t('pos.title')}
+            <h1 className="text-base sm:text-xl font-bold text-slate-900 flex items-center gap-1 sm:gap-2">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-600" />
+              <span className="hidden sm:inline">{t('pos.title')}</span>
+              <span className="sm:hidden">POS</span>
             </h1>
-            <p className="text-xs text-slate-500 font-medium">{tenant?.name}</p>
+            <p className="text-xs text-slate-500 font-medium hidden sm:block">{tenant?.name}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          {/* Shift Status Indicator */}
+        <div className="flex items-center gap-1.5 sm:gap-3">
+          {/* Shift Status Indicator - compact on mobile */}
           {currentShift ? (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-xl">
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-emerald-50 border border-emerald-100 rounded-lg sm:rounded-xl">
               <div className="h-2 w-2 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-emerald-700 text-sm font-semibold">{t('pos.shift')} #{currentShift.shift_number}</span>
+              <span className="text-emerald-700 text-xs sm:text-sm font-semibold hidden sm:inline">{t('pos.shift')} #{currentShift.shift_number}</span>
+              <span className="text-emerald-700 text-xs font-semibold sm:hidden">#{currentShift.shift_number}</span>
             </div>
           ) : (
             <button
               onClick={() => navigate('/pos/shifts')}
-              className="flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-100 rounded-xl hover:bg-amber-100 transition-colors"
+              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-amber-50 border border-amber-100 rounded-lg sm:rounded-xl hover:bg-amber-100 transition-colors"
             >
               <div className="h-2 w-2 bg-amber-500 rounded-full" />
-              <span className="text-amber-700 text-sm font-semibold">{t('pos.noShift')}</span>
+              <span className="text-amber-700 text-xs sm:text-sm font-semibold hidden sm:inline">{t('pos.noShift')}</span>
             </button>
           )}
           {/* Refresh Button */}
@@ -396,13 +399,13 @@ export default function POSPage() {
             disabled={productsLoading}
             variant="ghost"
             size="icon"
-            className="text-slate-500 hover:text-blue-700 hover:bg-blue-50 rounded-xl"
+            className="text-slate-500 hover:text-blue-700 hover:bg-blue-50 rounded-xl h-8 w-8 sm:h-10 sm:w-10 hidden sm:flex"
             title="Refresh products"
           >
-            <RefreshCw className={`h-5 w-5 ${productsLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`h-4 w-4 sm:h-5 sm:w-5 ${productsLoading ? 'animate-spin' : ''}`} />
           </Button>
-          {/* View Toggle */}
-          <div className="flex items-center bg-slate-100 p-1 rounded-xl">
+          {/* View Toggle - hidden on mobile */}
+          <div className="hidden md:flex items-center bg-slate-100 p-1 rounded-xl">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
@@ -416,29 +419,45 @@ export default function POSPage() {
               <List className="h-4 w-4" />
             </button>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-indigo-50 border border-indigo-100 rounded-xl">
+          {/* Mobile Cart Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setShowMobileCart(!showMobileCart)}
+            className="lg:hidden relative h-9 w-9"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 h-5 w-5 bg-indigo-600 text-white text-xs rounded-full flex items-center justify-center font-bold">
+                {itemCount}
+              </span>
+            )}
+          </Button>
+          {/* Desktop item count */}
+          <div className="hidden lg:flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-50 border border-indigo-100 rounded-xl">
             <ShoppingCart className="h-4 w-4 text-indigo-600" />
-            <span className="text-indigo-700 font-bold">{itemCount} {t('dashboard.items')}</span>
+            <span className="text-indigo-700 font-bold text-sm">{itemCount} {t('dashboard.items')}</span>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-xl">
+          {/* Clock - hidden on mobile */}
+          <div className="hidden xl:flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-xl">
             <Clock className="h-4 w-4 text-slate-400" />
             <span className="text-slate-600 font-medium">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
           </div>
         </div>
       </header>
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden relative">
         {/* Left Panel - Products */}
-        <div className="flex-1 flex flex-col p-6">
+        <div className="flex-1 flex flex-col p-3 sm:p-6">
           {/* Search */}
-          <div className="relative mb-6">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+          <div className="relative mb-4 sm:mb-6">
+            <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-slate-400" />
             <Input
               ref={searchRef}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={t('pos.searchPlaceholder')}
-              className="h-14 pl-12 pr-12 text-lg bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 shadow-sm rounded-2xl transition-all"
+              className="h-12 sm:h-14 pl-10 sm:pl-12 pr-10 sm:pr-12 text-base sm:text-lg bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 shadow-sm rounded-xl sm:rounded-2xl transition-all"
             />
             {search && (
               <button 
@@ -468,7 +487,7 @@ export default function POSPage() {
                 <p className="text-sm mt-2 text-slate-500">{t('pos.addProductsFirst')}</p>
               </div>
             ) : viewMode === 'grid' ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
                 {products.map((product) => {
                   const stock = product.available_quantity ?? 0;
                   const isOutOfStock = stock <= 0;
@@ -478,7 +497,7 @@ export default function POSPage() {
                       key={product.id}
                       onClick={() => !isOutOfStock && addToCart(product)}
                       disabled={isOutOfStock}
-                      className={`group p-4 rounded-2xl text-left transition-all duration-300 border shadow-sm ${
+                      className={`group p-3 sm:p-4 rounded-xl sm:rounded-2xl text-left transition-all duration-300 border shadow-sm active:scale-95 ${
                         isOutOfStock 
                           ? 'bg-slate-50 border-slate-100 opacity-60 cursor-not-allowed' 
                           : 'bg-white border-slate-100 hover:border-indigo-300 hover:shadow-md hover:-translate-y-1 active:scale-95'
@@ -560,16 +579,26 @@ export default function POSPage() {
         </div>
 
         {/* Right Panel - Cart */}
-        <div className="w-[480px] bg-white flex flex-col shadow-xl z-10 border-l border-slate-200">
+        <div className={`fixed lg:relative inset-y-0 right-0 w-full sm:w-[420px] lg:w-[480px] bg-white flex flex-col shadow-xl z-50 lg:z-10 border-l border-slate-200 transition-transform duration-300 ${showMobileCart ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}`}>
           {/* Cart Header */}
-          <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-white/50 backdrop-blur-sm">
-            <div>
-              <h2 className="font-bold text-xl text-slate-900">Current Order</h2>
-              <p className="text-sm text-slate-500 font-medium mt-0.5">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+          <div className="p-4 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-white/50 backdrop-blur-sm">
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowMobileCart(false)}
+                className="lg:hidden h-9 w-9"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+              <div>
+                <h2 className="font-bold text-lg sm:text-xl text-slate-900">Current Order</h2>
+                <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5 hidden sm:block">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+              </div>
             </div>
             {cart.length > 0 && (
-              <Button variant="ghost" size="sm" onClick={clearCart} className="text-red-500 hover:text-red-600 hover:bg-red-50 rounded-xl px-3">
-                <Trash2 className="h-4 w-4 mr-2" /> Clear
+              <Button variant="ghost" size="sm" onClick={clearCart} className="text-red-500 hover:text-red-600 hover:bg-red-50 rounded-xl px-2 sm:px-3">
+                <Trash2 className="h-4 w-4 sm:mr-2" /> <span className="hidden sm:inline">Clear</span>
               </Button>
             )}
           </div>
