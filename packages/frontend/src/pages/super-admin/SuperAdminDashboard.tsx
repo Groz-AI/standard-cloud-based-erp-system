@@ -165,13 +165,13 @@ export default function SuperAdminDashboard() {
   return (
     <div className="min-h-screen bg-slate-100">
       {/* Header */}
-      <header className="bg-slate-900 text-white px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <header className="bg-slate-900 text-white px-4 sm:px-6 py-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Shield className="h-8 w-8 text-amber-400" />
+            <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-amber-400" />
             <div>
-              <h1 className="text-xl font-bold">Super Admin Dashboard</h1>
-              <p className="text-sm text-slate-400">System Administration</p>
+              <h1 className="text-lg sm:text-xl font-bold">Super Admin Dashboard</h1>
+              <p className="text-xs sm:text-sm text-slate-400">System Administration</p>
             </div>
           </div>
           <Button 
@@ -184,9 +184,9 @@ export default function SuperAdminDashboard() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto p-6 space-y-6">
+      <main className="max-w-7xl mx-auto p-4 sm:p-6 space-y-6">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           <div className="bg-white rounded-xl p-6 shadow-sm border">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-blue-100 rounded-lg">

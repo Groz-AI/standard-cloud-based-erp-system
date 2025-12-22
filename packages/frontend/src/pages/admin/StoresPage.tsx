@@ -147,15 +147,16 @@ export default function StoresPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2">
-            <Store className="h-6 w-6 text-primary" />
-            Store Management
+          <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+            <Store className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            <span className="hidden sm:inline">Store Management</span>
+            <span className="sm:hidden">Stores</span>
           </h1>
-          <p className="text-muted-foreground mt-1">Manage your store locations</p>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">Manage your store locations</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
           {/* Store Usage Indicator */}
           <div className="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-lg">
             <span className="text-sm text-slate-600">Stores:</span>
@@ -171,7 +172,7 @@ export default function StoresPage() {
             className="gap-2"
             disabled={storeLimit !== null && storeLimit !== undefined && activeStoreCount >= storeLimit}
           >
-            <Plus className="h-4 w-4" /> Add Store
+            <Plus className="h-4 w-4" /> <span className="hidden sm:inline">Add Store</span><span className="sm:hidden">Add</span>
           </Button>
         </div>
       </div>

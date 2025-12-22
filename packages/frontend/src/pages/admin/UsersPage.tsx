@@ -200,16 +200,17 @@ export default function UsersPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2">
-            <Users className="h-6 w-6 text-primary" />
-            User Management
+          <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+            <Users className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            <span className="hidden sm:inline">User Management</span>
+            <span className="sm:hidden">Users</span>
           </h1>
-          <p className="text-muted-foreground mt-1">Manage user accounts and access permissions</p>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">Manage user accounts and access permissions</p>
         </div>
         <Button onClick={() => setShowModal(true)} className="gap-2">
-          <Plus className="h-4 w-4" /> Add User
+          <Plus className="h-4 w-4" /> <span className="hidden sm:inline">Add User</span><span className="sm:hidden">Add</span>
         </Button>
       </div>
 
@@ -236,7 +237,8 @@ export default function UsersPage() {
             <p>No users found</p>
           </div>
         ) : (
-          <table className="w-full">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[900px]">
             <thead className="bg-muted/50 border-b">
               <tr>
                 <th className="text-left p-4 font-medium">User</th>
@@ -322,6 +324,7 @@ export default function UsersPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 

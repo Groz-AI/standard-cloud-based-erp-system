@@ -105,13 +105,13 @@ export default function CategoriesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{t('categories.title')}</h1>
-          <p className="text-muted-foreground">{t('categories.manage')}</p>
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">{t('categories.title')}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">{t('categories.manage')}</p>
         </div>
         <Button onClick={openCreate}>
-          <Plus className="h-4 w-4 mr-2" /> {t('categories.addCategory')}
+          <Plus className="h-4 w-4 mr-2" /> <span className="hidden sm:inline">{t('categories.addCategory')}</span><span className="sm:hidden">Add</span>
         </Button>
       </div>
 

@@ -161,15 +161,15 @@ export default function ReceiveStockPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{t('inventory.purchasing')}</h1>
-          <p className="text-muted-foreground">{t('inventory.purchasingDesc')}</p>
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">{t('inventory.purchasing')}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">{t('inventory.purchasingDesc')}</p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b">
+      <div className="flex gap-2 border-b overflow-x-auto">
         <button
           onClick={() => setActiveTab('new')}
           className={`px-4 py-2 font-medium border-b-2 transition-colors ${
@@ -230,7 +230,7 @@ export default function ReceiveStockPage() {
         <>
       {/* Reference & Notes */}
       <div className="bg-white rounded-xl border shadow-sm p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">{t('inventory.reference')}</label>
             <Input

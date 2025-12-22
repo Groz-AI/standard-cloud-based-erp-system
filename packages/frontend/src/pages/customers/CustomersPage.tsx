@@ -113,13 +113,13 @@ export default function CustomersPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{t('sidebar.customers')}</h1>
-          <p className="text-muted-foreground">{t('customers.manageDatabase')}</p>
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">{t('sidebar.customers')}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">{t('customers.manageDatabase')}</p>
         </div>
         <Button onClick={openCreate}>
-          <Plus className="h-4 w-4 mr-2" /> {t('pos.addCustomer')}
+          <Plus className="h-4 w-4 mr-2" /> <span className="hidden sm:inline">{t('pos.addCustomer')}</span><span className="sm:hidden">Add</span>
         </Button>
       </div>
 
@@ -140,7 +140,8 @@ export default function CustomersPage() {
             <p className="text-sm text-muted-foreground mt-1">{t('customers.clickAddCustomer')}</p>
           </div>
         ) : (
-          <table className="w-full">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[600px]">
             <thead className="border-b bg-slate-50">
               <tr>
                 <th className="text-left p-4 font-medium">{t('customers.name')}</th>
@@ -169,6 +170,7 @@ export default function CustomersPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 
