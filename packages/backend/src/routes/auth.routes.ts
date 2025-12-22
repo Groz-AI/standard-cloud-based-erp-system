@@ -29,6 +29,11 @@ const changePasswordSchema = z.object({
   newPassword: z.string().min(8)
 });
 
+const changeEmailSchema = z.object({
+  newEmail: z.string().email(),
+  password: z.string().min(1)
+});
+
 // POST /auth/login
 router.post('/login', async (req: Request, res: Response) => {
   try {
@@ -127,6 +132,29 @@ router.post('/change-password', authenticate, async (req: Request, res: Response
     res.status(400).json({
       success: false,
       error: { code: 'PASSWORD_CHANGE_FAILED', message }
+    });
+  }
+});
+
+// POST /auth/change-email
+router.post('/change-email', authenticate, async (req: Request, res: Response) => {
+  try {
+    const body = changeEmailSchema.parse(req.body);
+    await AuthService.changeEmail(
+      req.ctx!.userId,
+      body.newEmail,
+      body.password
+    );
+    
+    res.json({
+      success: true,
+      data: { message: 'Email changed successfully' }
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Email change failed';
+    res.status(400).json({
+      success: false,
+      error: { code: 'EMAIL_CHANGE_FAILED', message }
     });
   }
 });

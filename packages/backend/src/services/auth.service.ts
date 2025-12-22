@@ -319,6 +319,44 @@ export class AuthService {
   }
 
   /**
+   * Change email
+   */
+  static async changeEmail(
+    userId: string,
+    newEmail: string,
+    password: string
+  ): Promise<void> {
+    const userResult = await query<{ password_hash: string; email: string }>(
+      `SELECT password_hash, email FROM users WHERE id = $1`,
+      [userId]
+    );
+
+    if (userResult.rows.length === 0) {
+      throw new Error('User not found');
+    }
+
+    const validPassword = await bcrypt.compare(password, userResult.rows[0].password_hash);
+    if (!validPassword) {
+      throw new Error('Password is incorrect');
+    }
+
+    // Check if new email is already taken
+    const existingUser = await query(
+      `SELECT id FROM users WHERE email = $1 AND id != $2`,
+      [newEmail.toLowerCase(), userId]
+    );
+
+    if (existingUser.rows.length > 0) {
+      throw new Error('Email is already in use');
+    }
+
+    await query(
+      `UPDATE users SET email = $1, updated_at = NOW() WHERE id = $2`,
+      [newEmail.toLowerCase(), userId]
+    );
+  }
+
+  /**
    * Change password
    */
   static async changePassword(

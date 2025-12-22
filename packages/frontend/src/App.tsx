@@ -50,6 +50,9 @@ import StoresPage from '@/pages/admin/StoresPage';
 import AuditLogPage from '@/pages/admin/AuditLogPage';
 import SettingsPage from '@/pages/admin/SettingsPage';
 
+// Profile Page
+import ProfilePage from '@/pages/profile/ProfilePage';
+
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   if (!isAuthenticated) return <Navigate to="/login" replace />;
@@ -117,6 +120,9 @@ function App() {
           <Route path="/admin/stores" element={<StoresPage />} />
           <Route path="/admin/audit" element={<AuditLogPage />} />
           <Route path="/admin/settings" element={<SettingsPage />} />
+          
+          {/* Profile */}
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
 
         {/* Catch all */}

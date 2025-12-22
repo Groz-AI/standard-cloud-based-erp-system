@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, Package, ShoppingCart, Warehouse, Users, BarChart3,
   Settings, LogOut, ChevronDown, Store, Receipt,
-  Menu, X, Search
+  Menu, X, Search, UserCircle
 } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -228,18 +228,32 @@ export default function DashboardLayout() {
                   </div>
                 )}
                 
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={cn(
-                    "text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors",
-                    !sidebarOpen && "h-10 w-10"
-                  )}
-                  onClick={() => { logout(); navigate('/login'); }}
-                  title="Sign out"
-                >
-                  <LogOut className="h-5 w-5" />
-                </Button>
+                <div className="flex items-center gap-1">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={cn(
+                      "text-slate-400 hover:text-primary hover:bg-primary/10 rounded-xl transition-colors",
+                      !sidebarOpen && "h-10 w-10"
+                    )}
+                    onClick={() => navigate('/profile')}
+                    title="My Profile"
+                  >
+                    <UserCircle className="h-5 w-5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={cn(
+                      "text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors",
+                      !sidebarOpen && "h-10 w-10"
+                    )}
+                    onClick={() => { logout(); navigate('/login'); }}
+                    title="Sign out"
+                  >
+                    <LogOut className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
