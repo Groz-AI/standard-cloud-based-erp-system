@@ -173,7 +173,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-6 sm:mb-8">
         {statsLoading ? (
           [...Array(4)].map((_, i) => (
             <div key={i} className="h-32 rounded-2xl bg-white shadow-sm border border-slate-100 p-6 animate-pulse" />
