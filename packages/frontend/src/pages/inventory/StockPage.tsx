@@ -103,8 +103,8 @@ export default function StockPage() {
 
   return (
     <div className="space-y-8 animate-fade-in pb-10">
-      {/* Search and Filters */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      {/* Header Section */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{t('stock.title')}</h1>
           <p className="text-slate-500 mt-1 text-sm sm:text-lg">{t('stock.description')}</p>
@@ -177,7 +177,7 @@ export default function StockPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4 group hover:shadow-md transition-all">
           <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition-transform">
             <Package className="h-6 w-6 text-blue-600" />

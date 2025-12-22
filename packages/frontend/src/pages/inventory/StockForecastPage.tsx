@@ -390,14 +390,15 @@ function RecommendationCard({ recommendation: rec, currency, onCreateOrder }: { 
 
           {/* Action Footer */}
           {rec.suggested_quantity > 0 && (
-            <div className="mt-4 pt-4 border-t border-black/10 flex items-center justify-between">
+            <div className="mt-4 pt-4 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-sm">
                 <ShoppingCart className="h-4 w-4 text-muted-foreground" />
                 <span className="text-muted-foreground">Estimated Cost:</span>
                 <span className="font-semibold">{formatCurrency(rec.estimated_cost, currency)}</span>
               </div>
-              <Button size="sm" className="gap-2" onClick={() => onCreateOrder(rec)}>
-                Create Purchase Order
+              <Button size="sm" className="gap-2 w-full sm:w-auto" onClick={() => onCreateOrder(rec)}>
+                <span className="hidden sm:inline">Create Purchase Order</span>
+                <span className="sm:hidden">Create PO</span>
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>

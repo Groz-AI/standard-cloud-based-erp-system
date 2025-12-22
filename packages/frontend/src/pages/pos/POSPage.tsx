@@ -700,7 +700,7 @@ export default function POSPage() {
           </div>
 
           {/* Cart Items */}
-          <div className="flex-1 overflow-y-auto bg-slate-50/50 p-4">
+          <div className="flex-1 overflow-y-auto bg-slate-50/50 p-4 pb-safe">
             {cart.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-slate-400">
                 <div className="w-24 h-24 rounded-full bg-slate-100 flex items-center justify-center mb-4 shadow-inner">
@@ -757,11 +757,11 @@ export default function POSPage() {
           </div>
 
           {/* Payment Section */}
-          <div className="border-t bg-white p-6 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-20">
+          <div className="border-t bg-white p-4 sm:p-6 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-20 pb-safe">
             {!showPayment ? (
               <>
                 {/* Totals */}
-                <div className="space-y-3 mb-6">
+                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                   <div className="flex justify-between text-slate-500 text-sm">
                     <span>{t('pos.subtotal')} ({itemCount} {t('dashboard.items')})</span>
                     <span className="font-medium text-slate-900">{formatCurrency(subtotal, tenant?.currencyCode)}</span>
@@ -781,10 +781,10 @@ export default function POSPage() {
                 </div>
 
                 {/* Payment Buttons */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   <Button
                     size="lg"
-                    className="h-14 text-lg bg-emerald-600 hover:bg-emerald-700 hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20 rounded-xl transition-all"
+                    className="h-12 sm:h-14 text-base sm:text-lg bg-emerald-600 hover:bg-emerald-700 hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20 rounded-xl transition-all"
                     disabled={cart.length === 0}
                     onClick={() => setShowPayment(true)}
                   >
@@ -811,7 +811,7 @@ export default function POSPage() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="w-full h-14 text-lg border-2 border-purple-200 hover:bg-purple-50 hover:border-purple-400 rounded-xl transition-all"
+                      className="w-full h-12 sm:h-14 text-base sm:text-lg border-2 border-purple-200 hover:bg-purple-50 hover:border-purple-400 rounded-xl transition-all"
                       disabled={cart.length === 0}
                       onClick={() => setShowWalletOptions(true)}
                     >
@@ -928,18 +928,18 @@ export default function POSPage() {
                   )}
 
                   {/* Actions */}
-                  <div className="grid grid-cols-3 gap-3 pt-2">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-2">
                     <Button
                       variant="outline"
                       size="lg"
-                      className="h-14 rounded-xl border-slate-200 hover:bg-slate-50 text-slate-600"
+                      className="h-12 sm:h-14 rounded-xl border-slate-200 hover:bg-slate-50 text-slate-600"
                       onClick={() => { setShowPayment(false); setCashReceived(''); }}
                     >
                       <ArrowLeft className="h-5 w-5" />
                     </Button>
                     <Button
                       size="lg"
-                      className="col-span-2 h-14 text-lg bg-emerald-600 hover:bg-emerald-700 hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20 rounded-xl transition-all"
+                      className="col-span-2 h-12 sm:h-14 text-base sm:text-lg bg-emerald-600 hover:bg-emerald-700 hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20 rounded-xl transition-all"
                       disabled={isProcessing || cashAmount < total}
                       onClick={() => completeSale('cash')}
                     >

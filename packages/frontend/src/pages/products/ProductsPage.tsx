@@ -282,7 +282,8 @@ export default function ProductsPage() {
             </Button>
           </div>
         ) : (
-          <table className="w-full">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[1000px]">
             <thead className="border-b border-gray-200/50 bg-gradient-to-r from-gray-50/80 to-white/80">
               <tr>
                 <th className="text-left p-4 font-bold text-gray-700 text-sm uppercase tracking-wide">{t('products.name')}</th>
@@ -348,6 +349,7 @@ export default function ProductsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 
