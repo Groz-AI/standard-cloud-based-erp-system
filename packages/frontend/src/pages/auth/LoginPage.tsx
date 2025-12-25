@@ -116,6 +116,27 @@ export default function LoginPage() {
           Need an account? Contact your system administrator
         </p>
       </div>
+
+      {/* GrozAI Footer */}
+      <div className="mt-8 pt-6 border-t border-gray-200/50">
+        <div className="text-center space-y-2">
+          <p className="text-xs text-gray-600 font-medium">
+            Powered by <span className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">GrozAI</span>
+          </p>
+          <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+            <Phone className="w-3 h-3" />
+            <a 
+              href="tel:+201097459765" 
+              className="hover:text-blue-600 transition-colors font-medium"
+            >
+              +20 109 745 9765
+            </a>
+          </div>
+          <p className="text-xs text-gray-400">
+            Enterprise Solutions & AI Development
+          </p>
+        </div>
+      </div>
     </form>
   );
 }
