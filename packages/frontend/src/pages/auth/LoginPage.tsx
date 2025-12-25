@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
-import { Mail, Lock, ArrowRight, Loader2, Sparkles, Zap } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Loader2, Sparkles, Zap, Phone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function LoginPage() {
